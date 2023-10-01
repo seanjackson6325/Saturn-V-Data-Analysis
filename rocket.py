@@ -29,7 +29,8 @@ def std_error(std, size):
     return std / math.sqrt(size)
 
 
-# Task 1 ######################################################################
+# Load and graph data from "rocket.csv"
+
 
 rocket_data = np.loadtxt('rocket.csv', delimiter = ',')
 N = len(rocket_data)
@@ -52,7 +53,9 @@ plt.errorbar(times, positions, yerr = uncertainties,
               color='red', ls = 'none')
 plt.savefig("rocket_data_task1.jpg")
 
-# Task 2 ######################################################################
+
+# Find the average speed from the data, as well as the
+# standard error and standard deviations of the speed.
 
 
 speeds_mean = sum(positions) / sum(times)
@@ -72,7 +75,11 @@ print('Std. Deviation of Speeds: ' + str(speeds_std_dev))
 print('Std. Error of Speeds: ' + str(speeds_std_error))
 print('------------------------\n')
 
-# task 3 ######################################################################
+
+# Find average position and time, use a linear regression model
+# to calculate the speed and initial position of the rocket.
+# this new function is called "estimate_pos"
+
 
 positions_average = sum(positions) / len(positions)
 times_average = sum(times) / len(times)
@@ -102,13 +109,18 @@ estimated_positions = []
 for i in range(N):
     estimated_positions.append(estimate_pos(times[i], d_0, u))
 
-# task 4 ######################################################################
+
+# Plot the linear regression model:
+
 
 times_task_4 = np.array(times)
 estimated_u_task_4 = estimate_pos(times_task_4, d_0, u)
 plt.plot(np.array(times), estimated_u_task_4, color = 'green')
 
-# task 5 ######################################################################
+
+# Find chi (just a measure of how good of a fit the regression
+# model is to the original data).
+
 
 # X_2 Function:
 def chi(measured, estimated, uncertainties):
@@ -126,7 +138,8 @@ print('Chi (X_2) Output: ' + str(chi_fit_task_5))
 print('------------------------\n')
 
 
-# task 6 ######################################################################
+# now, use curve_fit to fit the data instead of the linear regression.
+# also, plot this new model:
 
 def linear_function(x, m, b):
     return m*x + b
