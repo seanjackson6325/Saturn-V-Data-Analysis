@@ -1,4 +1,10 @@
 # -*- coding: utf-8 -*-
+"""
+This is a program I made for a PHY224 lab at the University of Toronto.
+Given some data about the Saturn V rocket, I developed methods to
+accurately predict it's position 
+"""
+
 
 import math
 import numpy as np
